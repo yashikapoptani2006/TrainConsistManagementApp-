@@ -1,31 +1,38 @@
 package com.train.app;
 
-import java.util.Arrays;
-
 public class TrainApp {
 
     public static void main(String[] args) {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Array of bogie names
-        String[] bogieNames = {
-                "Sleeper",
-                "AC Chair",
-                "First Class",
-                "General",
-                "Luxury"
+        // Unsorted bogie IDs
+        String[] bogieIds = {
+                "BG101",
+                "BG205",
+                "BG309",
+                "BG412",
+                "BG550"
         };
 
-        // Display original
-        System.out.println("Original Bogie Names:");
-        System.out.println(Arrays.toString(bogieNames));
+        // Search key
+        String searchKey = "BG309";
 
-        // Sort alphabetically
-        Arrays.sort(bogieNames);
+        boolean found = false;
 
-        // Display sorted
-        System.out.println("\nSorted Bogie Names:");
-        System.out.println(Arrays.toString(bogieNames));
+        // Linear Search
+        for (String id : bogieIds) {
+            if (id.equals(searchKey)) {
+                found = true;
+                break; // stop immediately if found
+            }
+        }
+
+        // Display result
+        if (found) {
+            System.out.println("Bogie ID " + searchKey + " found in the train consist.");
+        } else {
+            System.out.println("Bogie ID " + searchKey + " not found.");
+        }
     }
 }
