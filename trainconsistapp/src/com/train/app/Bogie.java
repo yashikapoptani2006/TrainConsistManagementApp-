@@ -1,5 +1,7 @@
 package com.train.app;
+
 public class Bogie {
+
     private String name;
     private int capacity;
 
