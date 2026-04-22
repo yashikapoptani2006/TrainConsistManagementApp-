@@ -20,6 +20,6 @@ public class Bogie {
 
     @Override
     public String toString() {
-        return name + " (Capacity: " + capacity + ")";
+        return name + "(" + capacity + ")";
     }
 }
