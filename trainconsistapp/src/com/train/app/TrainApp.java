@@ -6,20 +6,36 @@ public class TrainApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        GoodsBogie b1 = new GoodsBogie("Cylindrical");
-        GoodsBogie b2 = new GoodsBogie("Rectangular");
+        // Passenger bogie capacities
+        int[] capacities = {72, 56, 24, 70, 60};
 
-        // Safe case
-        b1.assignCargo("Petroleum");
+        System.out.print("Original Capacities: ");
+        printArray(capacities);
 
-        // Unsafe case
-        b2.assignCargo("Petroleum");
+        // Bubble Sort
+        for (int i = 0; i < capacities.length - 1; i++) {
 
-        // Program continues
-        b2.assignCargo("Coal");
+            for (int j = 0; j < capacities.length - 1 - i; j++) {
 
-        System.out.println("\nFinal Bogie States:");
-        System.out.println(b1);
-        System.out.println(b2);
+                if (capacities[j] > capacities[j + 1]) {
+
+                    // Swap
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.print("Sorted Capacities:   ");
+        printArray(capacities);
+    }
+
+    // Helper method
+    public static void printArray(int[] arr) {
+        for (int value : arr) {
+            System.out.print(value + " ");
+        }
+        System.out.println();
     }
 }
