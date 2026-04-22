@@ -6,17 +6,20 @@ public class TrainApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        try {
-            PassengerBogie b1 = new PassengerBogie("Sleeper", 72);
-            System.out.println("Created: " + b1);
+        GoodsBogie b1 = new GoodsBogie("Cylindrical");
+        GoodsBogie b2 = new GoodsBogie("Rectangular");
 
-            PassengerBogie b2 = new PassengerBogie("AC Chair", 0);
-            System.out.println("Created: " + b2);
+        // Safe case
+        b1.assignCargo("Petroleum");
 
-        } catch (InvalidCapacityException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        // Unsafe case
+        b2.assignCargo("Petroleum");
 
-        System.out.println("Program continues safely.");
+        // Program continues
+        b2.assignCargo("Coal");
+
+        System.out.println("\nFinal Bogie States:");
+        System.out.println(b1);
+        System.out.println(b2);
     }
 }
