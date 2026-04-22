@@ -1,61 +1,48 @@
 package com.train.app;
 
-import java.util.Arrays;
-
 public class TrainApp {
 
     public static void main(String[] args) {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Bogie IDs (can be unsorted)
-        String[] bogieIds = {
-                "BG309",
-                "BG101",
-                "BG550",
-                "BG205",
-                "BG412"
-        };
+        // Example 1: Empty train
+        String[] bogieIds = {};
 
-        // Search key
-        String searchKey = "BG205";
+        String searchKey = "BG101";
 
-        // Sort first (required for Binary Search)
-        Arrays.sort(bogieIds);
+        try {
+            boolean found = searchBogie(bogieIds, searchKey);
 
-        boolean found = binarySearch(bogieIds, searchKey);
+            if (found) {
+                System.out.println("Bogie ID " + searchKey + " found.");
+            } else {
+                System.out.println("Bogie ID " + searchKey + " not found.");
+            }
 
-        // Display sorted array
-        System.out.println("Sorted Bogie IDs: " + Arrays.toString(bogieIds));
-
-        // Result
-        if (found) {
-            System.out.println("Bogie ID " + searchKey + " found.");
-        } else {
-            System.out.println("Bogie ID " + searchKey + " not found.");
+        } catch (IllegalStateException e) {
+            System.out.println("Error: " + e.getMessage());
         }
+
+        System.out.println("Program continues safely.");
     }
 
-    public static boolean binarySearch(String[] arr, String key) {
+    public static boolean searchBogie(String[] bogieIds, String key) {
 
-        int low = 0;
-        int high = arr.length - 1;
+        // Fail-fast validation
+        if (bogieIds.length == 0) {
+            throw new IllegalStateException(
+                    "Cannot search: train consist is empty."
+            );
+        }
 
-        while (low <= high) {
-
-            int mid = (low + high) / 2;
-
-            int compare = key.compareTo(arr[mid]);
-
-            if (compare == 0) {
-                return true; // found
-            } else if (compare < 0) {
-                high = mid - 1; // search left
-            } else {
-                low = mid + 1; // search right
+        // Linear Search
+        for (String id : bogieIds) {
+            if (id.equals(key)) {
+                return true;
             }
         }
 
-        return false; // not found
+        return false;
     }
 }
