@@ -1,7 +1,7 @@
 package com.train.app;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TrainApp {
 
@@ -9,24 +9,33 @@ public class TrainApp {
 
         System.out.println("=== Train Consist Management App ===");
 
-        // Create list of bogies
-        List<Bogie> bogies = new ArrayList<>();
+        // Sample inputs
+        String trainId = "TRN-1234";
+        String cargoCode = "PET-AB";
 
-        bogies.add(new Bogie("Sleeper", 72));
-        bogies.add(new Bogie("AC Chair", 60));
-        bogies.add(new Bogie("First Class", 40));
-        bogies.add(new Bogie("Luxury Coach", 80));
+        // Regex patterns
+        String trainPatternText = "TRN-\\d{4}";
+        String cargoPatternText = "PET-[A-Z]{2}";
 
-        // Calculate total seating capacity
-        int totalSeats = bogies.stream()
-                .map(Bogie::getCapacity)
-                .reduce(0, Integer::sum);
+        // Compile patterns
+        Pattern trainPattern = Pattern.compile(trainPatternText);
+        Pattern cargoPattern = Pattern.compile(cargoPatternText);
 
-        // Display bogies
-        System.out.println("Bogies:");
-        bogies.forEach(System.out::println);
+        // Create matchers
+        Matcher trainMatcher = trainPattern.matcher(trainId);
+        Matcher cargoMatcher = cargoPattern.matcher(cargoCode);
 
-        // Display total
-        System.out.println("\nTotal Seating Capacity: " + totalSeats);
+        // Validate
+        if (trainMatcher.matches()) {
+            System.out.println("Train ID is valid: " + trainId);
+        } else {
+            System.out.println("Train ID is invalid: " + trainId);
+        }
+
+        if (cargoMatcher.matches()) {
+            System.out.println("Cargo Code is valid: " + cargoCode);
+        } else {
+            System.out.println("Cargo Code is invalid: " + cargoCode);
+        }
     }
 }
